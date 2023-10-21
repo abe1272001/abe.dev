@@ -11,7 +11,7 @@ export default function Header() {
     <header className="flex items-center justify-between p-4">
       <h1 className="text-2xl font-bold">Abe.dev</h1>
       <button
-        className="p-2 rounded-full hover:bg-gray-200 dark:hover:bg-gray-800"
+        className="rounded-full p-2 hover:bg-gray-200 dark:hover:bg-gray-800"
         onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
       >
         {theme === 'dark' ? <SunIcon /> : <MoonIcon />}
