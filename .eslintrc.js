@@ -33,6 +33,7 @@ module.exports = {
     'plugin:sonarjs/recommended',
     'plugin:security/recommended',
     'plugin:react-hooks/recommended',
+    'plugin:tailwindcss/recommended',
   ],
   rules: {
     '@typescript-eslint/no-unused-vars': 'error',
@@ -66,5 +67,6 @@ module.exports = {
     'no-nested-ternary': 'off',
     'import/prefer-default-export': 'off',
     '@typescript-eslint/no-var-requires': 'off',
+    'tailwindcss/classnames-order': 'off', // Respect prettier-plugin-tailwindcss order
   },
 }
