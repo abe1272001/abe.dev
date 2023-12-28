@@ -3,10 +3,6 @@ import type { ComputedFields } from 'contentlayer/source-files'
 import readingTime from 'reading-time'
 
 const computedFields: ComputedFields = {
-  path: {
-    type: 'string',
-    resolve: (doc) => `/posts/${doc.slug}`,
-  },
   slug: {
     type: 'string',
     resolve: (doc) => `/${doc._raw.flattenedPath}`,
@@ -20,17 +16,14 @@ const computedFields: ComputedFields = {
 
 export const Post = defineDocumentType(() => ({
   name: 'Post',
-  filePathPattern: 'posts/**/*.md',
+  filePathPattern: 'posts/**/*.mdx',
+  contentType: 'mdx',
   fields: {
     title: {
       type: 'string',
       required: true,
     },
     description: {
-      type: 'string',
-      required: true,
-    },
-    slug: {
       type: 'string',
       required: true,
     },
