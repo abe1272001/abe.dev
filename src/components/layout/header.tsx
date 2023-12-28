@@ -1,21 +1,42 @@
 'use client'
 
-import { MoonIcon, SunIcon } from '@radix-ui/react-icons'
-import { Button } from '@/components/ui/button'
-import { useTheme } from 'next-themes'
+import React from 'react'
+import Link from 'next/link'
+
+import {
+  NavigationMenu,
+  NavigationMenuItem,
+  NavigationMenuLink,
+  NavigationMenuList,
+  navigationMenuTriggerStyle,
+} from '@/components/ui/navigation-menu'
+import { ThemeSwitcher } from '@/components/theme-switcher'
 
 export default function Header() {
-  const { theme, setTheme } = useTheme()
-
   return (
     <header className="flex items-center justify-between p-4">
-      <h1 className="text-2xl font-bold">Abe.dev</h1>
-      <button
-        className="rounded-full p-2 hover:bg-gray-200 dark:hover:bg-gray-800"
-        onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
-      >
-        {theme === 'dark' ? <SunIcon /> : <MoonIcon />}
-      </button>
+      <Link className="text-2xl font-bold" href="/">
+        Abe.dev
+      </Link>
+      <NavigationMenu className="hidden md:flex">
+        <NavigationMenuList>
+          <NavigationMenuItem>
+            <Link href="/posts" legacyBehavior passHref>
+              <NavigationMenuLink className={navigationMenuTriggerStyle()}>
+                所有文章
+              </NavigationMenuLink>
+            </Link>
+          </NavigationMenuItem>
+          <NavigationMenuItem>
+            <Link href="/categories" legacyBehavior passHref>
+              <NavigationMenuLink className={navigationMenuTriggerStyle()}>
+                標籤分類
+              </NavigationMenuLink>
+            </Link>
+          </NavigationMenuItem>
+        </NavigationMenuList>
+      </NavigationMenu>
+      <ThemeSwitcher />
     </header>
   )
 }
