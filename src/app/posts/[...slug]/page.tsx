@@ -48,17 +48,26 @@ const PostPage = async ({ params }: PostProps) => {
   }
 
   return (
-    <article className="prose mx-auto max-w-2xl py-8 dark:prose-invert">
-      <div className="mb-8 text-center">
-        <time dateTime={post.date} className="mb-1 text-xs text-gray-600">
-          {format(parseISO(post.date), 'LLLL d, yyyy')}
-        </time>
-        <h1>{post.title}</h1>
-        {post.description && <p className="text-xl">{post.description}</p>}
-      </div>
-      <hr className="my-6" />
-      <Mdx code={post.body.code} />
-    </article>
+    <div>
+      {/* <aside>Hi</aside> */}
+      <article className="prose mx-auto max-w-2xl py-8 dark:prose-invert">
+        <div className="mb-8 text-center">
+          <time
+            dateTime={post.date}
+            className="mb-1 text-xs text-gray-600 dark:text-gray-200"
+          >
+            {format(parseISO(post.date), 'LLLL d, yyyy')}
+          </time>
+          <h1>{post.title}</h1>
+          {post.description && <p className="text-xl">{post.description}</p>}
+          <p className="text-right text-sm text-gray-600 dark:text-gray-200">
+            {post.readingTime.text}
+          </p>
+        </div>
+        <hr className="my-6" />
+        <Mdx code={post.body.code} />
+      </article>
+    </div>
   )
 }
 
