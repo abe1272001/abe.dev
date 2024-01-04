@@ -14,7 +14,7 @@ import { ThemeSwitcher } from '@/components/theme-switcher'
 
 export default function Header() {
   return (
-    <header className="flex items-center justify-between p-4">
+    <header className="flex h-[var(--header-height)] items-center justify-between p-4">
       <Link className="text-2xl font-bold" href="/">
         Abe.dev
       </Link>

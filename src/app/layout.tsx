@@ -3,6 +3,7 @@ import './globals.css'
 import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
 
+import { Footer } from '@/components/layout/footer'
 import Header from '@/components/layout/header'
 import { TailwindIndicator } from '@/components/tailwind-indicator'
 import { ThemeProvider } from '@/components/theme-provider'
@@ -28,9 +29,12 @@ export default function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
-          <div className="mx-auto min-h-screen px-4 py-3">
+          <div className="">
             <Header />
-            <main>{children}</main>
+            <main className="mx-auto min-h-[calc(100vh-var(--header-height)-var(--footer-height))] px-4 py-3">
+              {children}
+            </main>
+            <Footer />
           </div>
           <TailwindIndicator />
         </ThemeProvider>
