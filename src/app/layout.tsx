@@ -1,4 +1,6 @@
 import './globals.css'
+import '@/styles/prism-plus.css'
+import '@/styles/prism-one-dark.css'
 
 import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'

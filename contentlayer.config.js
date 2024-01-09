@@ -1,8 +1,13 @@
 import { defineDocumentType, makeSource } from 'contentlayer/source-files'
-import type { ComputedFields } from 'contentlayer/source-files'
+// import type { ComputedFields } from 'contentlayer/source-files'
 import readingTime from 'reading-time'
+import rehypeAutolinkHeadings from 'rehype-autolink-headings'
+import rehypeCodeTitles from 'rehype-code-titles'
+import rehypePrism from 'rehype-prism-plus'
+import rehypeSlug from 'rehype-slug'
+import remarkGfm from 'remark-gfm'
 
-const computedFields: ComputedFields = {
+const computedFields = {
   slug: {
     type: 'string',
     resolve: (doc) => `/${doc._raw.flattenedPath}`,
@@ -46,4 +51,20 @@ export const Post = defineDocumentType(() => ({
 export default makeSource({
   contentDirPath: './content',
   documentTypes: [Post],
+  mdx: {
+    remarkPlugins: [remarkGfm],
+    rehypePlugins: [
+      rehypeSlug,
+      rehypeCodeTitles,
+      [rehypePrism, { ignoreMissing: true }],
+      [
+        rehypeAutolinkHeadings,
+        {
+          properties: {
+            className: ['anchor'],
+          },
+        },
+      ],
+    ],
+  },
 })
