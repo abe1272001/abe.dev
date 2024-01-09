@@ -1,8 +1,14 @@
+'use client'
+
 import Image from 'next/image'
+import type { MDXComponents } from 'mdx/types'
 import { useMDXComponent } from 'next-contentlayer/hooks'
 
-const mdxComponents = {
-  Image,
+import { Pre } from './Pre'
+
+const mdxComponents: MDXComponents = {
+  Image: (props) => <Image {...props} alt={props?.alt} />,
+  pre: Pre,
 }
 
 interface MdxProps {
