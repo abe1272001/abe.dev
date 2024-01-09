@@ -1,3 +1,5 @@
+'use client'
+
 import { useEffect, useRef, useState } from 'react'
 import { copyToClipboard } from '@/utils/copyToClipboard'
 import { Check, Copy } from 'lucide-react'
