@@ -2,6 +2,7 @@ import { Metadata } from 'next'
 import { notFound } from 'next/navigation'
 import { allPosts } from 'contentlayer/generated'
 import { format, parseISO } from 'date-fns'
+import Balancer from 'react-wrap-balancer'
 
 import { Mdx } from '@/components/mdx-components'
 
@@ -58,7 +59,9 @@ const PostPage = async ({ params }: PostProps) => {
           >
             {format(parseISO(post.date), 'LLLL d, yyyy')}
           </time>
-          <h1>{post.title}</h1>
+          <h1>
+            <Balancer>{post.title}</Balancer>
+          </h1>
           {post.description && <p className="text-xl">{post.description}</p>}
           <p className="text-right text-sm text-gray-600 dark:text-gray-200">
             {post.readingTime.text}
