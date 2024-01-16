@@ -2,11 +2,11 @@ import Image from 'next/image'
 import type { MDXComponents } from 'mdx/types'
 import { useMDXComponent } from 'next-contentlayer/hooks'
 
-import { Pre } from './Pre'
+import { CustomPre } from './mdx/Pre'
 
 const mdxComponents: MDXComponents = {
   Image: (props) => <Image {...props} alt={props?.alt} />,
-  pre: (props) => <Pre {...props} />,
+  pre: (props) => <CustomPre {...props} />,
 }
 
 interface MdxProps {

@@ -7,9 +7,11 @@ import { Check, Copy } from 'lucide-react'
 import { removeDuplicateNewLine } from '@/lib/removeDuplicateNewLine'
 import { cn } from '@/lib/utils'
 
+import { Button } from '../ui/button'
+
 type Props = React.ComponentPropsWithoutRef<'pre'>
 
-export const Pre = ({ children, className, ...props }: Props) => {
+export const CustomPre = ({ children, className, ...props }: Props) => {
   const preRef = useRef<HTMLPreElement>(null)
 
   const [copied, setCopied] = useState(false)
@@ -42,9 +44,7 @@ export const Pre = ({ children, className, ...props }: Props) => {
           >
             Copied!
           </span>
-
-          <button
-            type="button"
+          <Button
             aria-label="Copy to Clipboard"
             onClick={onClick}
             disabled={copied}
@@ -69,7 +69,6 @@ export const Pre = ({ children, className, ...props }: Props) => {
                   'pointer-events-none h-4 w-4'
                 )}
               />
-
               <Check
                 className={cn(
                   { block: copied, hidden: !copied },
@@ -77,9 +76,8 @@ export const Pre = ({ children, className, ...props }: Props) => {
                 )}
               />
             </div>
-          </button>
+          </Button>
         </div>
-
         {children}
       </pre>
     </div>

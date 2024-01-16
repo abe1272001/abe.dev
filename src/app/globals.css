@@ -84,7 +84,7 @@
   @apply rounded-t-lg bg-gray-200 px-5 py-3 font-mono text-sm font-bold text-gray-800 dark:bg-gray-900 dark:text-gray-200;
 }
 
-.rehype-code-title + pre[class*='language-'] {
+.rehype-code-title + div > pre[class*='language-'] {
   @apply mt-0 rounded-t-none !important;
 }
 
