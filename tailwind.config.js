@@ -1,4 +1,5 @@
 /** @type {import('tailwindcss').Config} */
+
 module.exports = {
   darkMode: ['class'],
   content: [
@@ -70,6 +71,27 @@ module.exports = {
         'accordion-down': 'accordion-down 0.2s ease-out',
         'accordion-up': 'accordion-up 0.2s ease-out',
       },
+      typography: (theme) => ({
+        DEFAULT: {
+          css: {
+            code: {
+              color: theme('colors.pink.500'),
+              backgroundColor: theme('colors.gray.100'),
+              paddingLeft: '4px',
+              paddingRight: '4px',
+              paddingTop: '2px',
+              paddingBottom: '2px',
+              borderRadius: '0.25rem',
+            },
+            'code::before': {
+              content: 'none',
+            },
+            'code::after': {
+              content: 'none',
+            },
+          },
+        },
+      }),
     },
   },
   plugins: [require('tailwindcss-animate'), require('@tailwindcss/typography')],
