@@ -1,0 +1,319 @@
+---
+title: Vue State Management 介紹 — Pinia
+description: 認識一下由 Vue 官方所推薦使用的 Pinia 狀態管理工具吧！
+date: 2023-02-03
+category: Vue
+published: true
+---
+
+![](https://miro.medium.com/v2/resize%3Afit%3A1400/format%3Awebp/1%2AqpCMM4A6eY1U83LSWAiEuA.png)
+
+相信所有 Vue 的開發者在開發上都會遇到某些狀態會被不同元件所使用的問題，今天我們就來認識一下由 Vue 官方所推薦使用的 Pinia 狀態管理工具吧！
+
+Pinia 是由 Vue.js 的團隊成員所開發的全新狀態管理工具，你可能會想說既然有了 Vuex，為什麼還要開發另一套呢？我們來看一下 Vuex 5 當初的開發提案。
+
+![](https://miro.medium.com/v2/resize%3Afit%3A1400/format%3Awebp/1%2AQyTfoPoXujofrxUE9lkZUw.png)
+
+你會發現 Pinia 完美的符合上述的提案需求，可以說 Pinia 就是 Vuex 5 也不為過，而因為 Pinia 也是官方人員所開發，所以官方就直接將 Pinia 納入接管了，與 Vuex 分別是獨立的 Library，而在 Vuex 的 repository 也會看到官方在 README.md 上寫道 ：
+
+> Pinia is now the new default
+> The official state management library for Vue has changed to Pinia. Pinia has almost the exact same or enhanced API as Vuex 5, described in Vuex 5 RFC. You could simply consider Pinia as Vuex 5 with a different name. Pinia also works with Vue 2.x as well.
+
+Vuex3, Vuex4 目前還是有在維護，但並不會在現有程式碼之上開發新功能了，若讀者還在使用 Vuex 的話，可以考慮將使用 Vuex 的應用程式遷移至 Pinia；若是新開的專案，則強烈建議直接使用 Pinia。
+
+## 為什麼要使用 Pinia?
+
+- Devtool 支援
+- 自動熱更新 (HMR)
+- Plugin 支援
+- 完整的 TypeScript 支援
+- Server Side Rendering 支援
+
+## 與 Vuex 3.x/4.x 比較
+
+- mutation 不再存在，他們被認為是極其冗長的。
+- 無需創建客制化容器來支援 typescript，已全面支援 typescript，可以更方便的使用類型推斷。
+- 不再需要注入語法糖，只要 import，互叫 function，直接享受自動補全功能。
+- 不再需要動態的新增 store，預設模式下使用 store 時會自動加入且註冊完畢。
+- 不再有巢狀的 module 結構，Pinia 提供了扁平化的結構，同時也支持所有 store 可以相互使用。
+- 沒有 namespaced modules，考慮到 store 的扁平化設計，命名 store 是固有的定義方式，也可以說所有的 store 都需要被命名。
+
+> 我認為最大的改變是將 mutation 給移除，這讓許多開發者都為之歡呼，可以直接在 actions 裏對資料進行 async / await 的操作，程式碼也變得更簡潔！接下來就和大家介紹基礎用法吧！
+
+## 安裝
+
+```bash
+yarn add pinia
+# 或者使用 npm
+npm install pinia
+```
+
+安裝完成之後，要在 main.js 全局註冊 Pinia 才能夠使用！
+
+```js
+import { createPinia } from 'pinia'
+import { createApp } from 'vue'
+
+import App from './App.vue'
+
+const pinia = createPinia()
+const app = createApp(App)
+
+app.use(pinia)
+app.mount('#app')
+```
+
+## 基礎用法
+
+### 創建 store
+
+store 是使用 defineStore 來定義的，而第一個參數為 store 的名稱（唯一id）：
+
+```js
+// useCounterStore.js
+
+import { defineStore } from 'pinia'
+
+export const useCounterStore = defineStore('counter', {
+  state: () => {
+    return { count: 0 }
+  },
+  // could also be defined as
+  // state: () => ({ count: 0 })
+  getters: {
+    double: (state) => state.count * 2,
+  },
+  actions: {
+    increment() {
+      this.count++
+    },
+  },
+})
+```
+
+store name 是必要的，Pinia 會將 store 連接到 devtool 上時，即會顯示 store name。
+
+### 使用 store
+
+在元件內使用 store，在未實例化 store 之前，store 是不會掛載到 app 上的，一旦 store 被實例化，你就可以訪問到 state, getters, actions 中定義的各種屬性。
+
+```js
+import { useCounterStore } from '@/stores/counter'
+
+export default {
+  setup() {
+    // store 物件是 reactive，注意不可直接解構
+    const store = useCounterStore()
+
+    return {
+      // 可將 store 從 setup return 出去給 templete 使用
+      store,
+    }
+  },
+}
+```
+
+要特別注意的是 store 是個 reactive 建立的物件，所以不能直接對 store 進行解構，如需要解構，可以使用 storeToRefs 進行解構。
+
+```js
+import { useCounterStore } from '@/stores/counter'
+import { storeToRefs } from 'pinia'
+
+export default {
+  setup() {
+    const store = useCounterStore()
+
+    const { count } = storeToRefs(store)
+
+    return {
+      count,
+    }
+  },
+}
+```
+
+### 使用 store 的 state
+
+#### 1. 直接對 state 進行操作
+
+```js
+const store = useCounterStore()
+
+store.count++
+```
+
+#### 2. 重置 state
+
+可以通過調用 store 裏的 `$reset()` 方法將 state 重置為初始值。
+
+```js
+const store = useCounterStore()
+
+store.$reset()
+```
+
+#### 3. 調用 $patch 修改
+
+```js
+const store = useCounterStore()
+
+store.$patch({
+  count: store.count + 1,
+})
+
+//or
+
+store.$patch((state) => {
+  state.count += 1
+  state.items.push({
+    name: 'iphone',
+    quantity: 1,
+  })
+})
+```
+
+#### 使用 $state 替換整個 state
+
+```js
+const store = useCounterStore()
+store.$state = {
+  count: 666,
+}
+```
+
+> 使用要小心，這會直接替換整個 state
+
+### 使用 store 的 getters
+
+等同於 computed 的計算屬性，用來 cache data，一旦 data 發生變化，就會運算出新的值。
+
+```js
+export const useCounterStore = defineStore('counter', {
+  state: () => ({ count: 0 }),
+  getters: {
+    double: (state) => state.count * 2,
+  },
+})
+```
+
+然後在 store 使用 getter：
+
+```html
+<template>
+  <p>Double Count: {{ store.double }}</p>
+</template>
+<script setup>
+  const store = useCounterStore()
+</script>
+```
+
+#### 1. 在 getter 中使用其他 getter
+
+```js
+export const useCounterStore = defineStore('counter', {
+  state: () => ({ count: 0 }),
+  getters: {
+    double: (state) => state.count * 2,
+    doubleAndPlusOne() {
+      return this.double + 1
+    },
+  },
+})
+```
+
+#### 2. 將參數傳遞給 getter
+
+```js
+export const useStore = defineStore('usersList', {
+  state: () => ({ users: []})
+  getters: {
+    getUserById: (state) => {
+      return (userId) => state.users.find((user) => user.id === userId)
+    },
+  },
+})
+```
+
+在元件中使用：
+
+```html
+<script>
+  export default {
+    setup() {
+      const store = useStore()
+      return {
+        getUserById: store.getUserById,
+      }
+    },
+  }
+</script>
+
+<template>
+  <p>User 2: {{ getUserById(2) }}</p>
+</template>
+```
+
+### 使用 store 的 actions
+
+Action 等同於元件裡的 methods，可在 defineStore() 裏的 actions 定義，非常適合用來定義 app 業務邏輯；在 action 裏是可以做非同步的操作的，所以可以使用 async/await 相關的 API 。
+
+```js
+export const useCounterStore = defineStore('counter', {
+  state: () => ({ count: 0 }),
+  actions: {
+    increment() {
+      this.count++
+    },
+
+    asyncMutation() {
+      this.count = await new Promise((resolve) => {
+        setTimeout(() => {
+          resolve(10)
+        }, 2000)
+      })
+    }
+  },
+})
+```
+
+#### 1. 在 template 中使用其他 action
+
+```html
+<script setup>
+  const store = useCounterStore()
+  store.increment()
+</script>
+```
+
+#### 2. 在 action 中使用其他 store
+
+```js
+import { useAuthStore } from './useAuthStore'
+
+export const useSettingStore = defineStore('setting', {
+  state: () => ({
+    ....
+  })
+  actions: {
+    async fetchUserPerferences() {
+      const authStore = useAuthStore()
+      if (authStore.isAuthenticated) {
+        this.perferences = await api.fetchPreferences()
+      } else {
+        throw new Error('invalid access')
+      }
+    }
+  }
+})
+
+```
+
+## 結語
+
+以上就是 Pinia 的基礎用法，你會發現語法上很清楚簡潔，希望大家也可以試試 Pinia 囉！另外附上 <a href="https://www.vuemastery.com/pinia/?coupon=PINIA-DOCS&via=eduardo#cheat-sheet" target="_blank">Pinia Cheat Sheet</a> ，讓大家可以更快速的上手！
+
+## 參考資料
+
+- [Pinia](https://pinia.vuejs.org/)
+- [Vuex 的後繼者](https://johnnywang1994.github.io/book/articles/js/pinia-intro.html)
+- [Pinia 介紹與使用](https://juejin.cn/post/7174238728783659016)
