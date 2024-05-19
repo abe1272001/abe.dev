@@ -4,6 +4,7 @@ import '@/styles/prism-one-dark.css'
 
 import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
+import { Analytics } from '@vercel/analytics/react'
 
 import { Footer } from '@/components/layout/footer'
 import Header from '@/components/layout/header'
@@ -41,6 +42,7 @@ export default function RootLayout({
           <TailwindIndicator />
         </ThemeProvider>
       </body>
+      <Analytics />
     </html>
   )
 }
