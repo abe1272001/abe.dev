@@ -1,4 +1,8 @@
 #!/usr/bin/env sh
 . "$(dirname -- "$0")/_/husky.sh"
 
+# Run lint-staged
 npx lint-staged
+
+# Check for TypeScript errors (if using TypeScript)
+pnpm run type-check
