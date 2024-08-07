@@ -7,13 +7,11 @@ module.exports = {
       jsx: true,
     },
   },
-
   env: {
     browser: true,
     node: true,
     es6: true,
   },
-
   settings: {
     react: {
       version: 'detect',
@@ -24,7 +22,7 @@ module.exports = {
       },
     },
   },
-  plugins: ['@typescript-eslint'],
+  plugins: ['@typescript-eslint', 'react', 'react-hooks', 'tailwindcss'],
   extends: [
     'next/core-web-vitals',
     'plugin:@typescript-eslint/recommended',
@@ -70,12 +68,9 @@ module.exports = {
     'no-nested-ternary': 'off',
     'import/prefer-default-export': 'off',
     '@typescript-eslint/no-var-requires': 'off',
-    '@typescript-eslint/explicit-function-return-type': 'warn',
-    '@typescript-eslint/explicit-module-boundary-types': 'warn',
     '@typescript-eslint/no-non-null-assertion': 'warn',
     'react-hooks/rules-of-hooks': 'error',
     'react-hooks/exhaustive-deps': 'warn',
     'tailwindcss/classnames-order': 'off', // Respect prettier-plugin-tailwindcss order
-    'comma-dangle': ['error', 'always-multiline'],
   },
 }

@@ -6,6 +6,7 @@
     "dev": "next dev",
     "build": "next build",
     "build:content": "contentlayer2 build",
+    "preview": "next build && next start",
     "start": "next start",
     "lint": "next lint",
     "lint:fix": "next lint --fix .",
