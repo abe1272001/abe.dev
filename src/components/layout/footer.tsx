@@ -18,7 +18,7 @@ export function Footer() {
             aria-label="Twitter"
             className="text-secondary-foreground hover:text-blue-500  dark:hover:text-blue-400"
           >
-            <TwitterIcon className="h-6 w-6 fill-current" />
+            <TwitterIcon className="size-6 fill-current" />
           </a>
           <a
             target="_blank"
