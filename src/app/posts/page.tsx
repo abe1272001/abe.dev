@@ -6,7 +6,7 @@ function PostCard(post: Post) {
   return (
     <div className="mb-8">
       <h2 className="text-xl">
-        <Link href={post.slug} className="text-blue-700 hover:text-blue-900">
+        <Link href={post.path} className="text-blue-700 hover:text-blue-900">
           {post.title}
         </Link>
       </h2>

@@ -13,8 +13,8 @@ interface PostProps {
 }
 
 async function getPostFromParams(params: PostProps['params']) {
-  const slug = params?.slug?.join('/')
-  const post = allPosts.find((post) => post.slugAsParams === slug)
+  const slug = params.slug.join('/')
+  const post = allPosts.find((post) => post.slug === slug)
 
   if (!post) {
     null
@@ -24,7 +24,9 @@ async function getPostFromParams(params: PostProps['params']) {
 }
 
 export const generateStaticParams = async (): Promise<PostProps['params'][]> =>
-  allPosts.map((post) => ({ slug: post.slugAsParams.split('/') }))
+  allPosts.map((post) => ({
+    slug: post.slug.split('/'),
+  }))
 
 export async function generateMetadata({
   params,
@@ -49,28 +51,25 @@ const PostPage = async ({ params }: PostProps) => {
   }
 
   return (
-    <div>
-      {/* <aside>Hi</aside> */}
-      <article className="prose mx-auto max-w-2xl py-8 dark:prose-invert">
-        <div className="mb-8 text-center">
-          <time
-            dateTime={post.date}
-            className="mb-1 text-xs text-gray-600 dark:text-gray-200"
-          >
-            {format(parseISO(post.date), 'LLLL d, yyyy')}
-          </time>
-          <h1>
-            <Balancer>{post.title}</Balancer>
-          </h1>
-          {post.description && <p className="text-xl">{post.description}</p>}
-          <p className="text-right text-sm text-gray-600 dark:text-gray-200">
-            {post.readingTime.text}
-          </p>
-        </div>
-        <hr className="my-6" />
-        <Mdx code={post.body.code} />
-      </article>
-    </div>
+    <article className="prose mx-auto max-w-2xl py-8 dark:prose-invert">
+      <div className="mb-8 text-center">
+        <time
+          dateTime={post.date}
+          className="mb-1 text-xs text-gray-600 dark:text-gray-200"
+        >
+          {format(parseISO(post.date), 'LLLL d, yyyy')}
+        </time>
+        <h1>
+          <Balancer>{post.title}</Balancer>
+        </h1>
+        {post.description && <p className="text-xl">{post.description}</p>}
+        <p className="text-right text-sm text-gray-600 dark:text-gray-200">
+          {post.readingTime.text}
+        </p>
+      </div>
+      <hr className="my-6" />
+      <Mdx code={post.body.code} />
+    </article>
   )
 }
 
