@@ -39,7 +39,7 @@ export async function generateMetadata({
 
   return {
     title: post.title,
-    description: post.description,
+    description: post.summary,
   }
 }
 
@@ -51,7 +51,7 @@ const PostPage = async ({ params }: PostProps) => {
   }
 
   return (
-    <article className="prose mx-auto max-w-2xl py-8 dark:prose-invert">
+    <article className="prose mx-auto py-8 dark:prose-invert">
       <div className="mb-8 text-center">
         <time
           dateTime={post.date}
@@ -62,7 +62,7 @@ const PostPage = async ({ params }: PostProps) => {
         <h1>
           <Balancer>{post.title}</Balancer>
         </h1>
-        {post.description && <p className="text-xl">{post.description}</p>}
+        {post.summary && <p className="text-xl">{post.summary}</p>}
         <p className="text-right text-sm text-gray-600 dark:text-gray-200">
           {post.readingTime.text}
         </p>

@@ -35,26 +35,18 @@ export const Post = defineDocumentType(() => ({
       type: 'string',
       required: true,
     },
-    description: {
-      type: 'string',
-      required: true,
-    },
     date: {
       type: 'string',
       required: true,
     },
-    category: {
-      type: 'string',
-      required: true,
-    },
-    image: {
-      type: 'string',
-      required: false,
-    },
-    published: {
-      type: 'boolean',
-      required: true,
-    },
+    tags: { type: 'list', of: { type: 'string' }, default: [] },
+    lastmod: { type: 'date' },
+    draft: { type: 'boolean' },
+    summary: { type: 'string' },
+    images: { type: 'json' },
+    layout: { type: 'string' },
+    bibliography: { type: 'string' },
+    canonicalUrl: { type: 'string' },
   },
   computedFields,
 }))
