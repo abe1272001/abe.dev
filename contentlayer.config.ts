@@ -1,5 +1,8 @@
-import { defineDocumentType, makeSource } from 'contentlayer/source-files'
-// import type { ComputedFields } from 'contentlayer/source-files'
+import {
+  ComputedFields,
+  defineDocumentType,
+  makeSource,
+} from 'contentlayer2/source-files'
 import readingTime from 'reading-time'
 import rehypeAutolinkHeadings from 'rehype-autolink-headings'
 import rehypeCodeTitles from 'rehype-code-titles'
@@ -7,14 +10,18 @@ import rehypePrism from 'rehype-prism-plus'
 import rehypeSlug from 'rehype-slug'
 import remarkGfm from 'remark-gfm'
 
-const computedFields = {
+const computedFields: ComputedFields = {
   slug: {
     type: 'string',
-    resolve: (doc) => `/${doc._raw.flattenedPath}`,
+    resolve: (doc) => doc._raw.flattenedPath.replace(/^.+?(\/)/, ''),
   },
-  slugAsParams: {
+  path: {
     type: 'string',
-    resolve: (doc) => doc._raw.flattenedPath.split('/').slice(1).join('/'),
+    resolve: (doc) => doc._raw.flattenedPath,
+  },
+  filePath: {
+    type: 'string',
+    resolve: (doc) => doc._raw.sourceFilePath,
   },
   readingTime: { type: 'json', resolve: (doc) => readingTime(doc.body.raw) },
 }
@@ -28,26 +35,18 @@ export const Post = defineDocumentType(() => ({
       type: 'string',
       required: true,
     },
-    description: {
-      type: 'string',
-      required: true,
-    },
     date: {
       type: 'string',
       required: true,
     },
-    category: {
-      type: 'string',
-      required: true,
-    },
-    image: {
-      type: 'string',
-      required: false,
-    },
-    published: {
-      type: 'boolean',
-      required: true,
-    },
+    tags: { type: 'list', of: { type: 'string' }, default: [] },
+    lastmod: { type: 'date' },
+    draft: { type: 'boolean' },
+    summary: { type: 'string' },
+    images: { type: 'json' },
+    layout: { type: 'string' },
+    bibliography: { type: 'string' },
+    canonicalUrl: { type: 'string' },
   },
   computedFields,
 }))

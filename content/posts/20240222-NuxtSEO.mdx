@@ -1,0 +1,45 @@
+---
+title: NuxtSEO 使用
+date: 2024-02-22
+tags: [vue, nuxt3]
+draft: true
+summary: NuxtSEO
+---
+
+NuxtSEO 套件包含以下套件
+
+- Nuxt Simple Robots
+- Nuxt Sitemap
+- Nuxt OG Image
+- Nuxt Schema.org
+- Nuxt SEO Experiments
+- Nuxt Link Checker
+
+1. install
+
+```shell
+pnpm i -D @nuxtjs/seo
+```
+
+2. Add it to your modules section in your nuxt.config:
+
+```js:nuxt.config.ts
+export default defineNuxtConfig({
+  modules: ['@nuxtjs/seo'],
+})
+```
+
+3. Configuring Site Config
+
+[Guide](https://nuxtseo.com/nuxt-seo/guides/configuring-modules)
+
+```js:nuxt.config.ts
+export default defineNuxtConfig({
+  site: {
+    url: 'https://example.com',
+    name: 'Awesome Site',
+    description: 'Welcome to my awesome site!',
+    defaultLocale: 'en', // not needed if you have @nuxtjs/i18n installed
+  }
+})
+```

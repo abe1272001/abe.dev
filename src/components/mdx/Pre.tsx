@@ -7,8 +7,6 @@ import { Check, Copy } from 'lucide-react'
 import { removeDuplicateNewLine } from '@/lib/removeDuplicateNewLine'
 import { cn } from '@/lib/utils'
 
-import { Button } from '../ui/button'
-
 type Props = React.ComponentPropsWithoutRef<'pre'>
 
 export const CustomPre = ({ children, className, ...props }: Props) => {
@@ -44,7 +42,7 @@ export const CustomPre = ({ children, className, ...props }: Props) => {
           >
             Copied!
           </span>
-          <Button
+          <button
             aria-label="Copy to Clipboard"
             onClick={onClick}
             disabled={copied}
@@ -76,7 +74,7 @@ export const CustomPre = ({ children, className, ...props }: Props) => {
                 )}
               />
             </div>
-          </Button>
+          </button>
         </div>
         {children}
       </pre>

@@ -8,6 +8,7 @@ import { Analytics } from '@vercel/analytics/react'
 
 import { Footer } from '@/components/layout/footer'
 import Header from '@/components/layout/header'
+import SectionContainer from '@/components/layout/section-container'
 import { TailwindIndicator } from '@/components/tailwind-indicator'
 import { ThemeProvider } from '@/components/theme-provider'
 
@@ -24,7 +25,7 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="en" suppressHydrationWarning>
+    <html lang="en" suppressHydrationWarning className="scroll-smooth">
       <body className={inter.className}>
         <ThemeProvider
           attribute="class"
@@ -32,13 +33,13 @@ export default function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
-          <div className="">
+          <SectionContainer>
             <Header />
-            <main className="mx-auto min-h-[calc(100vh-var(--header-height)-var(--footer-height))] px-4 py-3">
+            <main className="min-h-[calc(100vh-var(--header-height)-var(--footer-height))] py-3">
               {children}
             </main>
             <Footer />
-          </div>
+          </SectionContainer>
           <TailwindIndicator />
         </ThemeProvider>
       </body>

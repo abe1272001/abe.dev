@@ -1,4 +1,8 @@
 #!/usr/bin/env sh
 . "$(dirname -- "$0")/_/husky.sh"
 
-npx lint-staged
+# Run lint-staged
+npx lint-staged || {
+  echo "lint-staged failed. Please fix the issues and try committing again."
+  exit 1
+}
