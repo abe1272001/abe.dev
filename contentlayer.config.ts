@@ -52,7 +52,7 @@ export const Post = defineDocumentType(() => ({
 }))
 
 export default makeSource({
-  contentDirPath: './content',
+  contentDirPath: 'data',
   documentTypes: [Post],
   mdx: {
     remarkPlugins: [remarkGfm],
