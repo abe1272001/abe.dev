@@ -3,7 +3,7 @@ import { allCoreContent, sortPosts } from '@/utils/contentlayer'
 import { allPosts } from 'contentlayer/generated'
 import { format, parseISO } from 'date-fns'
 
-import Tag from '@/components/molecules/blog-tag'
+import AppBlogTag from '@/components/molecules/app-blog-tag'
 
 const MAX_DISPLAY = 5
 
@@ -50,7 +50,7 @@ export default function HomePage() {
                           </h2>
                           <div className="mt-2 flex flex-wrap">
                             {tags.map((tag) => (
-                              <Tag key={tag} text={tag} />
+                              <AppBlogTag key={tag} text={tag} />
                             ))}
                           </div>
                         </div>
@@ -61,7 +61,7 @@ export default function HomePage() {
                       <div className="text-base font-medium leading-6">
                         <Link
                           href={`/posts/${slug}`}
-                          className="text-pink-500 hover:text-pink-600 dark:hover:text-pink-400"
+                          className="text-primary-500 hover:text-primary-600 dark:hover:text-primary-400"
                           aria-label={`Read more: "${title}"`}
                         >
                           Read more &rarr;
@@ -79,7 +79,7 @@ export default function HomePage() {
         <div className="flex justify-end text-base font-medium leading-6">
           <Link
             href="/blog"
-            className="text-pink-500 hover:text-pink-600 dark:hover:text-pink-400"
+            className="text-primary-500 hover:text-primary-600 dark:hover:text-primary-400"
             aria-label="All posts"
           >
             All Posts &rarr;

@@ -18,13 +18,13 @@ export function ThemeSwitcher() {
   return (
     <button
       onClick={() => setTheme(theme === 'light' ? 'dark' : 'light')}
-      className="flex size-6 items-center justify-center rounded-md border"
+      className="flex size-8 items-center justify-center"
     >
       <span className="sr-only">Toggle mode</span>
       {theme === 'dark' ? (
-        <SunIcon className="size-4" />
+        <SunIcon className="size-6" />
       ) : (
-        <MoonIcon className="size-4" />
+        <MoonIcon className="size-6" />
       )}
     </button>
   )

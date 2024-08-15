@@ -4,12 +4,7 @@ import { Github, TwitterIcon } from 'lucide-react'
 export function Footer() {
   return (
     <footer className="flex min-h-[var(--footer-height)] justify-center border-t border-gray-200 pt-3 dark:border-gray-600">
-      <div className="flex flex-col justify-between py-4">
-        <nav className="space-x-6 text-center text-sm font-medium">
-          <Link href="/">Home</Link>
-          <Link href="/about">About</Link>
-        </nav>
-
+      <div className="flex flex-col justify-between gap-3 py-4">
         <div className="flex items-center justify-center gap-3">
           <a
             target="_blank"

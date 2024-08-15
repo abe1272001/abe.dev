@@ -5,6 +5,7 @@ import { format, parseISO } from 'date-fns'
 import Balancer from 'react-wrap-balancer'
 
 import { Mdx } from '@/components/mdx-components'
+import AppPageTitle from '@/components/molecules/app-page-title'
 
 interface PostProps {
   params: {
@@ -51,24 +52,26 @@ const PostPage = async ({ params }: PostProps) => {
   }
 
   return (
-    <article className="prose mx-auto py-8 dark:prose-invert">
-      <div className="mb-8 text-center">
+    <article className=" py-8">
+      <div className="mb-8 flex flex-col gap-8 text-center">
         <time
           dateTime={post.date}
-          className="mb-1 text-xs text-gray-600 dark:text-gray-200"
+          className="mb-1 text-sm text-gray-600 dark:text-gray-200"
         >
           {format(parseISO(post.date), 'LLLL d, yyyy')}
         </time>
-        <h1>
+        <AppPageTitle>
           <Balancer>{post.title}</Balancer>
-        </h1>
+        </AppPageTitle>
         {post.summary && <p className="text-xl">{post.summary}</p>}
         <p className="text-right text-sm text-gray-600 dark:text-gray-200">
           {post.readingTime.text}
         </p>
       </div>
       <hr className="my-6" />
-      <Mdx code={post.body.code} />
+      <div className="prose mx-auto max-w-3xl dark:prose-invert">
+        <Mdx code={post.body.code} />
+      </div>
     </article>
   )
 }

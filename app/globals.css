@@ -1,0 +1,45 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+.no-scrollbar {
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+}
+
+/* rehype-code-titles */
+
+.rehype-code-title {
+  @apply rounded-t-lg bg-gray-200 px-5 py-3 font-mono text-sm font-bold text-gray-800 dark:bg-gray-900 dark:text-gray-200;
+}
+
+.rehype-code-title + div > pre[class*='language-'] {
+  @apply mt-0 rounded-t-none !important;
+}
+
+/* rehype-autolink-headings */
+
+.anchor {
+  @apply invisible absolute -ml-5 w-5 cursor-pointer;
+}
+
+.anchor:hover {
+  @apply visible no-underline;
+}
+
+.anchor {
+  @apply no-underline;
+}
+
+*:hover > .anchor {
+  @apply visible font-bold no-underline;
+}
+
+.anchor:after {
+  @apply text-gray-300 dark:text-gray-600;
+  content: '#';
+}
