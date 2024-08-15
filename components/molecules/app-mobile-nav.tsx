@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import Link from 'next/link'
 import headerNavLinks from '@/data/headerNavLinks'
 import { AnimatePresence, motion } from 'framer-motion'
@@ -14,6 +14,14 @@ const AppMobileNav = () => {
   const toggleMenu = () => {
     setIsOpen((prevState) => !prevState)
   }
+
+  useEffect(() => {
+    if (isOpen) {
+      document.body.classList.add('overflow-hidden')
+    } else {
+      document.body.classList.remove('overflow-hidden')
+    }
+  }, [isOpen])
 
   return (
     <div className="sm:hidden">
