@@ -1,4 +1,4 @@
-import Link from 'next/Link'
+import Link from 'next/link'
 import { genPageMetadata } from '@/app/seo'
 import tagData from 'app/tag-data.json'
 import { slug } from 'github-slugger'
