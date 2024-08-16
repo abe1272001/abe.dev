@@ -14,7 +14,7 @@ export default function Header() {
       </Link>
 
       <div className="flex items-center gap-3 leading-5 sm:space-x-6">
-        <div className="no-scrollbar hidden max-w-40 items-center space-x-4 overflow-x-auto sm:flex sm:space-x-6 md:max-w-72 lg:max-w-96">
+        <div className="no-scrollbar hidden items-center space-x-4 overflow-x-auto sm:flex sm:space-x-6 md:max-w-72 lg:max-w-96">
           {headerNavLinks
             .filter((link) => link.href !== '/')
             .map((link) => (
