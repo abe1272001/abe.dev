@@ -5,6 +5,7 @@ import '@/css/prism-one-dark.css'
 import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
 import siteMetadata from '@/data/siteMetadata'
+import { Analytics as VercelAnalytics } from '@vercel/analytics/react'
 import { Analytics, AnalyticsConfig } from 'analytics'
 
 import { Footer } from '@/components/layout/footer'
@@ -44,6 +45,7 @@ export default function RootLayout({
           <TailwindIndicator />
         </ThemeProvider>
       </body>
+      <VercelAnalytics />
       <Analytics analyticsConfig={siteMetadata.analytics as AnalyticsConfig} />
     </html>
   )
