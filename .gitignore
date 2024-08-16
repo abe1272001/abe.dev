@@ -24,6 +24,9 @@ public/sitemap.xml
 # search
 /public/search.json
 
+# tag-data
+/app/tag-data.json
+
 # misc
 .DS_Store
 *.pem
