@@ -19,8 +19,8 @@ const inter = Inter({ subsets: ['latin'] })
 export const metadata: Metadata = {
   metadataBase: new URL(siteMetadata.siteUrl),
   title: {
-    default: siteMetadata.title,
-    template: `%s | ${siteMetadata.title}`,
+    default: `Hello world, I am Abe Chen | ${siteMetadata.author}`,
+    template: `%s | ${siteMetadata.author}`,
   },
   description: siteMetadata.description,
   openGraph: {

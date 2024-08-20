@@ -6,7 +6,7 @@ import { format, parseISO } from 'date-fns'
 
 import AppBlogTag from '@/components/molecules/app-blog-tag'
 
-export const metadata = genPageMetadata({ title: 'Blog' })
+export const metadata = genPageMetadata({ title: 'Posts' })
 
 function PostCard(post: CoreContent<Post>) {
   return (
