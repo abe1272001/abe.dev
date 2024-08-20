@@ -2,25 +2,27 @@
 const siteMetadata = {
   title: "Abe's Blog",
   author: 'Abe Chen',
-  headerTitle: 'Abe.Dev',
-  description: 'A blog created with Next.js and Tailwind.css',
-  language: 'en-us',
+  headerTitle: 'Abe Chen',
+  avatarUrl: 'https://avatars.githubusercontent.com/u/46858104?v=4',
+  description:
+    'The personal website of Abe Chen, a frontend developer dedicated to crafting detailed, high-quality products.',
+  language: 'zh-Hant', // for SEO
+  locale: 'zh_TW', // for Open Graph
   theme: 'system', // system, dark or light
-  siteUrl: 'https://abe-dev.vercel.app/',
+  siteUrl: 'https://abechen.net',
   siteRepo: 'https://github.com/abe1272001/abe.dev',
   siteLogo: `${process.env.BASE_PATH || ''}/static/images/logo.png`,
-  socialBanner: `${process.env.BASE_PATH || ''}/static/images/twitter-card.png`,
+  socialBanner: `${process.env.BASE_PATH || ''}/api/og`,
   // mastodon: 'https://mastodon.social/@mastodonuser',
   email: 'abe1272001@gmail.com',
   github: 'https://github.com/abe1272001',
   x: 'https://twitter.com/abe_chen1212',
-  facebook: 'https://facebook.com',
+  // facebook: 'https://facebook.com',
   // youtube: 'https://youtube.com',
   linkedin: 'https://www.linkedin.com/in/abe127/',
   medium: 'https://medium.com/@abechen',
   // threads: 'https://www.threads.net',
   // instagram: 'https://www.instagram.com/abe1272001/',
-  locale: 'en-US',
   // set to true if you want a navbar fixed to the top
   stickyNav: false,
   analytics: {
