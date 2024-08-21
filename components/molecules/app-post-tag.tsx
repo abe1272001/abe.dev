@@ -5,7 +5,7 @@ interface Props {
   text: string
 }
 
-const AppBlogTag = ({ text }: Props) => {
+const AppPostTag = ({ text }: Props) => {
   return (
     <Link
       href={`/tags/${slug(text)}`}
@@ -16,4 +16,4 @@ const AppBlogTag = ({ text }: Props) => {
   )
 }
 
-export default AppBlogTag
+export default AppPostTag

@@ -3,7 +3,7 @@ import { genPageMetadata } from '@/app/seo'
 import tagData from 'app/tag-data.json'
 import { slug } from 'github-slugger'
 
-import Tag from '@/components/molecules/app-blog-tag'
+import AppPostTag from '@/components/molecules/app-post-tag'
 
 export const metadata = genPageMetadata({
   title: 'Tags',
@@ -27,7 +27,7 @@ export default async function Page() {
           {sortedTags.map((t) => {
             return (
               <div key={t} className="my-2 mr-5">
-                <Tag text={t} />
+                <AppPostTag text={t} />
                 <Link
                   href={`/tags/${slug(t)}`}
                   className="-ml-2 text-sm font-semibold uppercase text-gray-600 dark:text-gray-300"
