@@ -3,7 +3,7 @@ import { allCoreContent, sortPosts } from '@/utils/contentlayer'
 import { allPosts } from 'contentlayer/generated'
 import { format, parseISO } from 'date-fns'
 
-import AppBlogTag from '@/components/molecules/app-blog-tag'
+import AppPostTag from '@/components/molecules/app-post-tag'
 
 const MAX_DISPLAY = 5
 
@@ -52,7 +52,7 @@ export default function HomePage() {
                             </h2>
                             <div className="mt-2 flex flex-wrap">
                               {tags.map((tag) => (
-                                <AppBlogTag key={tag} text={tag} />
+                                <AppPostTag key={tag} text={tag} />
                               ))}
                             </div>
                           </div>
