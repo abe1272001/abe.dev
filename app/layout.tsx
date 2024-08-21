@@ -19,7 +19,7 @@ const inter = Inter({ subsets: ['latin'] })
 export const metadata: Metadata = {
   metadataBase: new URL(siteMetadata.siteUrl),
   title: {
-    default: `Hello world, I am Abe Chen | ${siteMetadata.author}`,
+    default: `${siteMetadata.title} | ${siteMetadata.author}`,
     template: `%s | ${siteMetadata.author}`,
   },
   description: siteMetadata.description,
