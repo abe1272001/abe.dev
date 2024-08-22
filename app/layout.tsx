@@ -3,7 +3,7 @@ import '@/css/prism-plus.css'
 import '@/css/prism-one-dark.css'
 
 import type { Metadata } from 'next'
-import { Inter } from 'next/font/google'
+import { Roboto } from 'next/font/google'
 import siteMetadata from '@/data/siteMetadata'
 import { Analytics as VercelAnalytics } from '@vercel/analytics/react'
 import { Analytics, AnalyticsConfig } from 'analytics'
@@ -14,7 +14,12 @@ import SectionContainer from '@/components/layout/section-container'
 import { TailwindIndicator } from '@/components/tailwind-indicator'
 import { ThemeProvider } from '@/components/theme-provider'
 
-const inter = Inter({ subsets: ['latin'] })
+const roboto = Roboto({
+  weight: ['300', '400', '500', '700'],
+  subsets: ['latin'],
+  display: 'swap',
+  variable: '--font-roboto',
+})
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteMetadata.siteUrl),
@@ -83,7 +88,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" suppressHydrationWarning className="scroll-smooth">
-      <body className={inter.className}>
+      <body className={roboto.className}>
         <ThemeProvider
           attribute="class"
           defaultTheme="system"
