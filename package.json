@@ -16,6 +16,7 @@
     "prepare": "husky install"
   },
   "dependencies": {
+    "@giscus/react": "^3.0.0",
     "@types/mdx": "^2.0.13",
     "@types/node": "20.4.4",
     "@types/react": "18.2.15",

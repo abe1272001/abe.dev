@@ -5,6 +5,7 @@ import { format, parseISO } from 'date-fns'
 import Balancer from 'react-wrap-balancer'
 
 import { Mdx } from '@/components/mdx-components'
+import AppComments from '@/components/molecules/app-comments'
 import AppPageTitle from '@/components/molecules/app-page-title'
 
 interface PostProps {
@@ -71,6 +72,9 @@ const PostPage = async ({ params }: PostProps) => {
       <hr className="my-6" />
       <div className="prose mx-auto max-w-3xl dark:prose-invert">
         <Mdx code={post.body.code} />
+      </div>
+      <div className="mx-auto mt-8 max-w-3xl">
+        <AppComments />
       </div>
     </article>
   )
