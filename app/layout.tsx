@@ -45,6 +45,18 @@ export const metadata: Metadata = {
         sizes: '16x16',
         url: '/static/favicons/favicon-16x16.png',
       },
+      {
+        rel: 'icon',
+        type: 'image/png',
+        sizes: '192x192',
+        url: '/static/favicons/android-chrome-192x192.png',
+      },
+      {
+        rel: 'icon',
+        type: 'image/png',
+        sizes: '512x512',
+        url: '/static/favicons/android-chrome-512x512.png',
+      },
     ],
   },
   manifest: '/static/favicons/site.webmanifest',
