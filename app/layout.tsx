@@ -21,6 +21,8 @@ const roboto = Roboto({
   variable: '--font-roboto',
 })
 
+const basePath = process.env.BASE_PATH || ''
+
 export const metadata: Metadata = {
   metadataBase: new URL(siteMetadata.siteUrl),
   title: {
@@ -29,41 +31,43 @@ export const metadata: Metadata = {
   },
   description: siteMetadata.description,
   icons: {
-    icon: '/static/favicons/favicon.ico',
-    shortcut: '/static/favicons/favicon.ico',
-    apple: '/static/favicons/apple-touch-icon.png',
+    icon: {
+      url: `${basePath}/static/favicons/favicon.ico`,
+    },
+    shortcut: `${basePath}/static/favicons/favicon.ico`,
+    apple: `${basePath}/static/favicons/apple-touch-icon.png`,
     other: [
       {
         rel: 'icon',
         type: 'image/png',
         sizes: '32x32',
-        url: '/static/favicons/favicon-32x32.png',
+        url: `${basePath}/static/favicons/favicon-32x32.png`,
       },
       {
         rel: 'icon',
         type: 'image/png',
         sizes: '16x16',
-        url: '/static/favicons/favicon-16x16.png',
+        url: `${basePath}/static/favicons/favicon-16x16.png`,
       },
       {
         rel: 'icon',
         type: 'image/png',
         sizes: '192x192',
-        url: '/static/favicons/android-chrome-192x192.png',
+        url: `${basePath}/static/favicons/android-chrome-192x192.png`,
       },
       {
         rel: 'icon',
         type: 'image/png',
         sizes: '512x512',
-        url: '/static/favicons/android-chrome-512x512.png',
+        url: `${basePath}/static/favicons/android-chrome-512x512.png`,
       },
     ],
   },
-  manifest: '/static/favicons/site.webmanifest',
+  manifest: `${basePath}/static/favicons/site.webmanifest`,
   openGraph: {
     title: siteMetadata.title,
     description: siteMetadata.description,
-    url: './',
+    url: `${basePath}/`,
     siteName: siteMetadata.title,
     images: [siteMetadata.socialBanner],
     locale: siteMetadata.locale,
