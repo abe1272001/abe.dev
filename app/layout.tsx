@@ -23,6 +23,26 @@ export const metadata: Metadata = {
     template: `%s | ${siteMetadata.author}`,
   },
   description: siteMetadata.description,
+  icons: {
+    icon: '/static/favicons/favicon.ico',
+    shortcut: '/static/favicons/favicon.ico',
+    apple: '/static/favicons/apple-touch-icon.png',
+    other: [
+      {
+        rel: 'icon',
+        type: 'image/png',
+        sizes: '32x32',
+        url: '/static/favicons/favicon-32x32.png',
+      },
+      {
+        rel: 'icon',
+        type: 'image/png',
+        sizes: '16x16',
+        url: '/static/favicons/favicon-16x16.png',
+      },
+    ],
+  },
+  manifest: '/static/favicons/site.webmanifest',
   openGraph: {
     title: siteMetadata.title,
     description: siteMetadata.description,
@@ -61,31 +81,8 @@ export default function RootLayout({
 }: {
   children: React.ReactNode
 }) {
-  const basePath = process.env.BASE_PATH || ''
-
   return (
     <html lang="en" suppressHydrationWarning className="scroll-smooth">
-      <link
-        rel="apple-touch-icon"
-        sizes="180x180"
-        href={`${basePath}/static/favicons/apple-touch-icon.png`}
-      />
-      <link
-        rel="icon"
-        type="image/png"
-        sizes="32x32"
-        href={`${basePath}/static/favicons/favicon-32x32.png`}
-      />
-      <link
-        rel="icon"
-        type="image/png"
-        sizes="16x16"
-        href={`${basePath}/static/favicons/favicon-16x16.png`}
-      />
-      <link
-        rel="manifest"
-        href={`${basePath}/static/favicons/site.webmanifest`}
-      />
       <body className={inter.className}>
         <ThemeProvider
           attribute="class"
@@ -102,9 +99,11 @@ export default function RootLayout({
           </SectionContainer>
           <TailwindIndicator />
         </ThemeProvider>
+        <VercelAnalytics />
+        <Analytics
+          analyticsConfig={siteMetadata.analytics as AnalyticsConfig}
+        />
       </body>
-      <VercelAnalytics />
-      <Analytics analyticsConfig={siteMetadata.analytics as AnalyticsConfig} />
     </html>
   )
 }
