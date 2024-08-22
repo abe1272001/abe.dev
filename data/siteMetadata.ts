@@ -12,7 +12,7 @@ const siteMetadata = {
   siteUrl: 'https://abechen.net',
   siteRepo: 'https://github.com/abe1272001/abe.dev',
   siteLogo: `${process.env.BASE_PATH || ''}/static/images/logo.png`,
-  socialBanner: `${process.env.BASE_PATH || ''}/api/og`,
+  socialBanner: `${process.env.BASE_PATH || ''}/static/images/og-image.png`,
   // mastodon: 'https://mastodon.social/@mastodonuser',
   email: 'abe1272001@gmail.com',
   github: 'https://github.com/abe1272001',
