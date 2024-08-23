@@ -1,9 +1,19 @@
+import AuthorLayout from '@/layouts/author-layout'
 import { genPageMetadata } from 'app/seo'
+import { allAuthors, Author } from 'contentlayer/generated'
 
-export const metadata = genPageMetadata({ title: 'About' })
+import { Mdx } from '@/components/mdx-components'
+
+export const metadata = genPageMetadata({ title: 'About Me' })
 
 const Page = () => {
-  return <div>Coming Soon</div>
+  const author = allAuthors.find((p) => p.slug === 'default') as Author
+
+  return (
+    <AuthorLayout>
+      <Mdx code={author.body.code} />
+    </AuthorLayout>
+  )
 }
 
 export default Page
