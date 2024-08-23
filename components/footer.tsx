@@ -2,25 +2,7 @@ import Link from 'next/link'
 import siteMetadata from '@/data/siteMetadata'
 import { Github, LinkedinIcon, MSquare, TwitterIcon } from 'lucide-react'
 
-const SocialIconLink = ({
-  icon,
-  href,
-}: {
-  icon: React.ReactNode
-  href: string
-}) => {
-  return (
-    <a
-      target="_blank"
-      href={href}
-      rel="noopener noreferrer"
-      aria-label={href}
-      className="text-black hover:text-blue-500 dark:text-white dark:hover:text-blue-400"
-    >
-      {icon}
-    </a>
-  )
-}
+import SocialIconLink from '@/components/molecules/app-social-icon-link'
 
 export function Footer() {
   return (

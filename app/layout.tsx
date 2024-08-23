@@ -8,9 +8,9 @@ import siteMetadata from '@/data/siteMetadata'
 import { Analytics as VercelAnalytics } from '@vercel/analytics/react'
 import { Analytics, AnalyticsConfig } from 'analytics'
 
-import { Footer } from '@/components/layout/footer'
-import Header from '@/components/layout/header'
-import SectionContainer from '@/components/layout/section-container'
+import { Footer } from '@/components/footer'
+import Header from '@/components/header'
+import SectionContainer from '@/components/section-container'
 import { TailwindIndicator } from '@/components/tailwind-indicator'
 import { ThemeProvider } from '@/components/theme-provider'
 
