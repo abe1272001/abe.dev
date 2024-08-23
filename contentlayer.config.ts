@@ -93,9 +93,27 @@ export const Post = defineDocumentType(() => ({
   computedFields,
 }))
 
+export const Author = defineDocumentType(() => ({
+  name: 'Author',
+  filePathPattern: 'authors/**/*.mdx',
+  contentType: 'mdx',
+  fields: {
+    name: { type: 'string', required: true },
+    avatar: { type: 'string' },
+    occupation: { type: 'string' },
+    company: { type: 'string' },
+    email: { type: 'string' },
+    twitter: { type: 'string' },
+    linkedin: { type: 'string' },
+    github: { type: 'string' },
+    layout: { type: 'string' },
+  },
+  computedFields,
+}))
+
 export default makeSource({
   contentDirPath: 'data',
-  documentTypes: [Post],
+  documentTypes: [Post, Author],
   mdx: {
     remarkPlugins: [remarkGfm],
     rehypePlugins: [

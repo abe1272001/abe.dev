@@ -5,7 +5,7 @@ const siteMetadata = {
   headerTitle: 'Abe Chen',
   avatarUrl: 'https://avatars.githubusercontent.com/u/46858104?v=4',
   description:
-    '這裡是 Abe Chen 的個人網站。作為一名專注於細節、高品質產品的軟體工程師，我專精於前端開發，包括 JavaScript、TypeScript、React、Next.js、Vue.js 和 Nuxt.js 等技術。 | The personal website of Abe Chen, a software engineer dedicated to crafting detailed, high-quality products. My expertise lies in front-end development, including technologies such as JavaScript, TypeScript, React, Next.js, Vue.js, and Nuxt.js.',
+    '這裡是 Abe Chen 的個人網站。作為一名專注於細節、打造高品質產品的軟體工程師，我專精於前端開發，包括 JavaScript、TypeScript、React、Next.js、Vue.js 和 Nuxt.js 等技術。| The personal website of Abe Chen, a software engineer dedicated to crafting detailed, high-quality products. My expertise lies in front-end development, including technologies such as JavaScript, TypeScript, React, Next.js, Vue.js, and Nuxt.js.',
   language: 'zh-Hant', // for SEO
   locale: 'zh_TW', // for Open Graph
   theme: 'system', // system, dark or light
@@ -19,7 +19,7 @@ const siteMetadata = {
   x: 'https://twitter.com/abe_chen1212',
   // facebook: 'https://facebook.com',
   // youtube: 'https://youtube.com',
-  linkedin: 'https://www.linkedin.com/in/abe127/',
+  linkedin: 'https://www.linkedin.com/in/abe127',
   medium: 'https://medium.com/@abechen',
   // threads: 'https://www.threads.net',
   // instagram: 'https://www.instagram.com/abe1272001/',
