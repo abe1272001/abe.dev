@@ -1,12 +1,11 @@
 import { Metadata } from 'next'
 import { notFound } from 'next/navigation'
-import { allPosts } from 'contentlayer/generated'
-import { format, parseISO } from 'date-fns'
-import Balancer from 'react-wrap-balancer'
+import siteMetadata from '@/data/siteMetadata'
+import PostLayout from '@/layouts/post-layout'
+import { allCoreContent, coreContent, sortPosts } from '@/utils/contentlayer'
+import { allPosts, Post } from 'contentlayer/generated'
 
-import { Mdx } from '@/components/mdx-components'
-import AppComments from '@/components/molecules/app-comments'
-import AppPageTitle from '@/components/molecules/app-page-title'
+import { MDXRenderer } from '@/components/mdx-components'
 
 interface PostProps {
   params: {
@@ -32,51 +31,64 @@ export const generateStaticParams = async (): Promise<PostProps['params'][]> =>
 
 export async function generateMetadata({
   params,
-}: PostProps): Promise<Metadata> {
+}: PostProps): Promise<Metadata | undefined> {
   const post = await getPostFromParams(params)
 
-  if (!post) {
-    return {}
-  }
+  if (!post) return
+
+  const publishedAt = new Date(post.date).toISOString()
+  const modifiedAt = new Date(post.lastmod || post.date).toISOString()
 
   return {
     title: post.title,
     description: post.summary,
+    openGraph: {
+      title: post.title,
+      description: post.summary,
+      siteName: siteMetadata.title,
+      locale: 'zh_TW',
+      type: 'article',
+      publishedTime: publishedAt,
+      modifiedTime: modifiedAt,
+      url: './',
+      images: [siteMetadata.socialBanner],
+      authors: [siteMetadata.author],
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title: post.title,
+      description: post.summary,
+      images: [siteMetadata.socialBanner],
+    },
   }
 }
 
 const PostPage = async ({ params }: PostProps) => {
-  const post = await getPostFromParams(params)
-
-  if (!post) {
-    notFound()
+  const slug = decodeURI(params.slug.join('/'))
+  const sortedCoreContents = allCoreContent(sortPosts(allPosts))
+  const postIndex = sortedCoreContents.findIndex((p) => p.slug === slug)
+  if (postIndex === -1) {
+    return notFound()
   }
 
+  const prev = sortedCoreContents[postIndex + 1]
+  const next = sortedCoreContents[postIndex - 1]
+  const post = allPosts.find((p) => p.slug === slug) as Post
+
+  const mainContent = coreContent(post)
+
+  const jsonLd = post.structuredData
+
   return (
-    <article className=" py-8">
-      <div className="mb-8 flex flex-col gap-8 text-center">
-        <time
-          dateTime={post.date}
-          className="mb-1 text-sm text-gray-600 dark:text-gray-200"
-        >
-          {format(parseISO(post.date), 'LLLL d, yyyy')}
-        </time>
-        <AppPageTitle>
-          <Balancer>{post.title}</Balancer>
-        </AppPageTitle>
-        {post.summary && <p className="text-xl">{post.summary}</p>}
-        <p className="text-right text-sm text-gray-600 dark:text-gray-200">
-          {post.readingTime.text}
-        </p>
-      </div>
-      <hr className="my-6" />
-      <div className="prose mx-auto max-w-3xl dark:prose-invert">
-        <Mdx code={post.body.code} />
-      </div>
-      <div className="mx-auto mt-8 max-w-3xl">
-        <AppComments />
-      </div>
-    </article>
+    <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
+      <PostLayout content={mainContent} next={next} prev={prev}>
+        <MDXRenderer code={post.body.code} />
+      </PostLayout>
+    </>
   )
 }
 
