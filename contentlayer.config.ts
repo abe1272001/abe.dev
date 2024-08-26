@@ -8,11 +8,18 @@ import {
 } from 'contentlayer2/source-files'
 import { slug } from 'github-slugger'
 import readingTime from 'reading-time'
+// Rehype packages
 import rehypeAutolinkHeadings from 'rehype-autolink-headings'
 import rehypeCodeTitles from 'rehype-code-titles'
-import rehypePrism from 'rehype-prism-plus'
+import rehypeKatex from 'rehype-katex'
+// import rehypeMermaid from 'rehype-mermaid'
+import rehypePresetMinify from 'rehype-preset-minify'
+import rehypePrismPlus from 'rehype-prism-plus'
 import rehypeSlug from 'rehype-slug'
+// Remark packages
 import remarkGfm from 'remark-gfm'
+import { remarkAlert } from 'remark-github-blockquote-alert'
+import remarkMath from 'remark-math'
 
 import siteMetadata from './data/siteMetadata'
 import { allCoreContent, sortPosts } from './utils/contentlayer.js'
@@ -90,7 +97,26 @@ export const Post = defineDocumentType(() => ({
     bibliography: { type: 'string' },
     canonicalUrl: { type: 'string' },
   },
-  computedFields,
+  computedFields: {
+    ...computedFields,
+    structuredData: {
+      type: 'json',
+      resolve: (doc) => ({
+        '@context': 'https://schema.org',
+        '@type': 'BlogPosting',
+        author: {
+          '@type': 'Person',
+          name: siteMetadata.author,
+        },
+        headline: doc.title,
+        datePublished: doc.date,
+        dateModified: doc.lastmod || doc.date,
+        description: doc.summary,
+        image: doc.images ? doc.images[0] : siteMetadata.socialBanner,
+        url: `${siteMetadata.siteUrl}/${doc._raw.flattenedPath}`,
+      }),
+    },
+  },
 }))
 
 export const Author = defineDocumentType(() => ({
@@ -115,11 +141,14 @@ export default makeSource({
   contentDirPath: 'data',
   documentTypes: [Post, Author],
   mdx: {
-    remarkPlugins: [remarkGfm],
+    remarkPlugins: [remarkGfm, remarkMath, remarkAlert],
     rehypePlugins: [
       rehypeSlug,
       rehypeCodeTitles,
-      [rehypePrism, { ignoreMissing: true }],
+      [rehypePrismPlus, { ignoreMissing: true }],
+      rehypeKatex,
+      // FIXME: Ask author
+      // rehypeMermaid,
       [
         rehypeAutolinkHeadings,
         {
@@ -128,6 +157,7 @@ export default makeSource({
           },
         },
       ],
+      rehypePresetMinify,
     ],
   },
   onSuccess: async (importData) => {

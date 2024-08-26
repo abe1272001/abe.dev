@@ -36,17 +36,6 @@ export function sortPosts<T extends MDXDocumentDate>(
   return allBlogs.sort((a, b) => dateSortDesc(a[dateKey], b[dateKey]))
 }
 
-/**
- * Kept for backwards compatibility
- * Please use `sortPosts` instead
- * @deprecated
- * @param {MDXBlog[]} allBlogs
- * @return {*}
- */
-export function sortedBlogPost(allBlogs: MDXDocumentDate[]) {
-  return sortPosts(allBlogs)
-}
-
 type ConvertUndefined<T> = OrNull<{
   [K in keyof T as undefined extends T[K] ? K : never]-?: T[K]
 }>

@@ -2,7 +2,7 @@ import AuthorLayout from '@/layouts/author-layout'
 import { genPageMetadata } from 'app/seo'
 import { allAuthors, Author } from 'contentlayer/generated'
 
-import { Mdx } from '@/components/mdx-components'
+import { MDXRenderer } from '@/components/mdx-components'
 
 export const metadata = genPageMetadata({ title: 'About Me' })
 
@@ -11,7 +11,7 @@ const Page = () => {
 
   return (
     <AuthorLayout>
-      <Mdx code={author.body.code} />
+      <MDXRenderer code={author.body.code} />
     </AuthorLayout>
   )
 }

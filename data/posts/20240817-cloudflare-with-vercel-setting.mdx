@@ -1,7 +1,7 @@
 ---
 title: 在 Cloudflare 購買域名並在 Vercel 使用的完整指南
 date: 2024-08-17
-tags: [vercel, cloudflare]
+tags: ['vercel', 'cloudflare']
 draft: true
 summary: 帶你完成在 Cloudflare 購買域名，並在 Vercel 上使用該域名的整個過程。使用 Cloudflare 的強大 DNS 管理和安全功能，以及 Vercel 的高效網站託管服務。
 ---
@@ -21,7 +21,7 @@ Vercel 和 Cloudflare 在 DNS（域名系統）方面的關係是一個有趣的
 
 2. 配置方式：
 
-   ```mermaid
+```mermaid
    graph LR
      A[用戶] --> B[域名]
      B --> C{Cloudflare DNS}
@@ -29,9 +29,9 @@ Vercel 和 Cloudflare 在 DNS（域名系統）方面的關係是一個有趣的
      C -->|CNAME| E[Vercel 域名]
      D --> F[Vercel 託管網站]
      E --> F
-   ```
+```
 
-   這個流程圖展示了用戶請求如何通過 Cloudflare 的 DNS 到達 Vercel 託管的網站。
+這個流程圖展示了用戶請求如何通過 Cloudflare 的 DNS 到達 Vercel 託管的網站。
 
 3. 角色分工：
 
