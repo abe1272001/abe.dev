@@ -13,7 +13,7 @@ interface MdxProps {
   code: string
 }
 
-export function Mdx({ code }: MdxProps) {
+export function MDXRenderer({ code }: MdxProps) {
   const MDXContent = useMDXComponent(code)
 
   return <MDXContent components={mdxComponents} />
