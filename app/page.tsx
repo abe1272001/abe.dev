@@ -50,7 +50,7 @@ export default function HomePage() {
                                 {title}
                               </Link>
                             </h2>
-                            <div className="mt-2 flex flex-wrap">
+                            <div className="mt-2 flex flex-wrap gap-2">
                               {tags.map((tag) => (
                                 <AppPostTag key={tag} text={tag} />
                               ))}

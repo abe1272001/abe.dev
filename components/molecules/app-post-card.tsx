@@ -14,7 +14,7 @@ export default function AppPostCard(post: CoreContent<Post>) {
             {post.title}
           </Link>
         </h2>
-        <div className="my-2 flex flex-wrap">
+        <div className="my-2 flex flex-wrap gap-2">
           {post.tags.map((tag) => (
             <AppPostTag key={tag} text={tag} />
           ))}

@@ -54,7 +54,7 @@ export default function PostLayout({
                 <h2 className="text-xs uppercase text-gray-500 dark:text-gray-400">
                   Tags
                 </h2>
-                <div className="flex flex-wrap">
+                <div className="flex flex-wrap gap-2">
                   {tags.map((tag) => (
                     <AppPostTag key={tag} text={tag} />
                   ))}
