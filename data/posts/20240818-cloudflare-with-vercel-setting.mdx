@@ -1,77 +1,99 @@
 ---
 title: 在 Cloudflare 購買域名並在 Vercel 使用的完整指南
-date: 2024-08-17
-tags: ['vercel', 'cloudflare']
-draft: true
-summary: 帶你完成在 Cloudflare 購買域名，並在 Vercel 上使用該域名的整個過程。使用 Cloudflare 的強大 DNS 管理和安全功能，以及 Vercel 的高效網站託管服務。
+date: 2024-08-18
+tags: ['web', 'network', 'vercel', 'cloudflare']
+summary: 本指南將帶你完成在 Cloudflare 購買域名，並在 Vercel 上使用該域名的整個過程。充分利用 Cloudflare 強大的 DNS 管理和安全功能，以及 Vercel 高效的網站託管服務。
 ---
 
-## 簡介
+# 簡介
 
-在現代網站開發中,選擇合適的域名和託管服務是關鍵步驟。本指南將帶你完成在 Cloudflare 購買域名,然後在 Vercel 上使用該域名的整個過程。這種組合能夠充分利用 Cloudflare 的強大 DNS 管理和安全功能,以及 Vercel 的高效網站託管服務。
+在現代網站開發中，選擇合適的域名和託管服務是關鍵步驟。本指南將帶你完成在 Cloudflare 購買域名，然後在 Vercel 上使用該域名的整個過程。這種組合能夠充分利用 Cloudflare 強大的 DNS 管理和安全功能，以及 Vercel 高效的網站託管服務。
 
-## Vercel 與 Cloudflare 的關係
+# Vercel 與 Cloudflare 的關係
 
-Vercel 和 Cloudflare 在 DNS（域名系統）方面的關係是一個有趣的話題。再進入主題之前，我們先深入探討一下兩者的關係：
+Vercel 和 Cloudflare 在 DNS（域名系統）方面的關係是一個值得探討的話題。在進入主題之前，讓我們深入了解一下兩者的關係：
 
-1. DNS 管理：
+## 1. DNS 管理：
 
-   - Cloudflare 主要是一個 DNS 管理器和 CDN（內容分發網絡）提供商。
-   - Vercel 主要是一個網站託管和部署平台。
+- Cloudflare 主要是一個 DNS 管理器和 CDN（內容分發網絡）提供商。
+- Vercel 主要是一個網站託管和部署平台。
 
-2. 配置方式：
+## 2. 配置方式：
+
+<Image
+  src="/static/posts/20240818/graph-of-cloudflare-and-verel.png"
+  sizes="100vw"
+  width="0"
+  height="0"
+  style={{
+    width: '100%',
+    height: 'auto',
+  }}
+/>
 
 ```mermaid
-   graph LR
-     A[用戶] --> B[域名]
-     B --> C{Cloudflare DNS}
-     C -->|A 記錄| D[Vercel IP]
-     C -->|CNAME| E[Vercel 域名]
-     D --> F[Vercel 託管網站]
-     E --> F
+graph LR
+A[用戶] --> B[域名]
+B --> C{Cloudflare DNS}
+C -->|A 記錄| D[Vercel IP]
+C -->|CNAME| E[Vercel 域名]
+D --> F[Vercel 託管網站]
+E --> F
+
 ```
 
 這個流程圖展示了用戶請求如何通過 Cloudflare 的 DNS 到達 Vercel 託管的網站。
 
-3. 角色分工：
+## 3. 角色分工：
 
-   - Cloudflare 負責 DNS 解析，將域名轉換為 IP 地址。
-   - Vercel 負責實際的網站託管和內容服務。
+- Cloudflare 負責 DNS 解析，將域名轉換為 IP 地址。
+- Vercel 負責實際的網站託管和內容服務。
 
-4. 優勢組合：
+## 4. 優勢組合：
 
-   - Cloudflare 提供額外的安全層（如 DDoS 保護）和 CDN 功能。
-   - Vercel 提供高效的靜態網站和 Serverless 函數託管。
+- Cloudflare 提供額外的安全層（如 DDoS 保護）和 CDN 功能。
+- Vercel 提供高效的靜態網站和 Serverless 函數託管。
 
 5. DNS 記錄類型：
 
    - A 記錄：直接指向 Vercel 的 IP。
    - CNAME 記錄：指向 Vercel 的域名。
 
-6. 潛在挑戰：
+## 6. 潛在挑戰：
 
-   - DNS 傳播延遲可能導致更改不立即生效。
-   - Cloudflare 的代理功能可能與某些 Vercel 功能衝突。
+- DNS 傳播延遲可能導致更改不立即生效。
+- Cloudflare 的代理功能可能與某些 Vercel 功能衝突。
 
-7. 最佳實踐：
+## 7. 最佳實踐：
 
-   - 使用 Cloudflare 的 DNS 只做解析，不啟用 Proxy 代理（橙色雲朵關閉）。
-   - 在 Vercel 上正確配置自定義域名。
-   - 確保 SSL/TLS 設置正確，以支持 HTTPS。
+- 使用 Cloudflare 的 DNS 只做解析，不啟用 Proxy 代理（橙色雲朵關閉）。
+- 在 Vercel 上正確配置自定義域名。
+- 確保 SSL/TLS 設置正確，以支持 HTTPS。
 
-8. 靈活性：
-   - 這種設置允許你利用兩個平台的優勢。
-   - 可以輕鬆切換或調整服務，而無需更改整個基礎設施。
+## 8. 靈活性：
 
-總的來說，Vercel 和 Cloudflare 在 DNS 配置中形成了一種互補的關係。Cloudflare 處理 DNS 管理和一些前端優化，而 Vercel 負責實際的網站託管和部署。這種組合為開發者提供了強大而靈活的網站託管解決方案。
+- 這種設置允許你利用兩個平台的優勢。
+- 可以輕鬆切換或調整服務，而無需更改整個基礎設施。
 
-## 系統架構
+## 9. 系統架構
 
 為了更好地理解 Cloudflare 域名和 Vercel 託管的工作方式，讓我們看一下下面的流程圖：
+
+<Image
+  src="/static/posts/20240818/network-structure.png"
+  sizes="100vw"
+  width="0"
+  height="0"
+  style={{
+    width: '100%',
+    height: 'auto',
+  }}
+/>
 
 ```mermaid
 graph TB
 A[用戶] -->|1. 訪問網站| B(Cloudflare DNS)
+
 B -->|2. DNS 查詢| C(Cloudflare DNS 記錄)
 C -->|3a. A 記錄| D[Vercel IP: 76.76.21.21]
 C -->|3b. CNAME 記錄| E[cname.vercel-dns.com]
@@ -80,12 +102,12 @@ E -->|4. 路由請求| F
 F -->|5. 提供內容| G[Vercel 託管的網站]
 G -->|6. 返回內容| A
 
-    subgraph Cloudflare
+    subgraph Cloudflare["Cloudflare"]
     B
     C
     end
 
-    subgraph Vercel
+    subgraph Vercel["Vercel"]
     F
     G
     end
@@ -97,6 +119,9 @@ G -->|6. 返回內容| A
     style E fill:#bfb,stroke:#333,stroke-width:2px
     style F fill:#bfb,stroke:#333,stroke-width:2px
     style G fill:#bfb,stroke:#333,stroke-width:2px
+    style Cloudflare fill:#e6f3ff,stroke:#333,stroke-width:2px
+    style Vercel fill:#e6ffe6,stroke:#333,stroke-width:2px
+
 ```
 
 這個流程圖展示了以下步驟：
@@ -110,7 +135,11 @@ G -->|6. 返回內容| A
 5. Vercel 提供託管在其平台上的網站內容。
 6. 內容通過相同的路徑返回給用戶。
 
-這個架構結合了 Cloudflare 的 DNS 管理和安全功能，以及 Vercel 的高效託管和全球邊緣網絡，為網站提供卓越的性能和安全性。
+> 這個架構結合了 Cloudflare 的 DNS 管理和安全功能，以及 Vercel 的高效託管和全球邊緣網絡，為網站提供卓越的效能和安全性。
+
+<hr />
+
+# 設定步驟
 
 ## 步驟 1: 在 Cloudflare 購買域名
 
@@ -136,8 +165,9 @@ G -->|6. 返回內容| A
 3. 添加以下兩筆 DNS 記錄 (Record):
    | 域名類型 | 記錄類型 (Type) | 名稱(Name) | 目標(Target) |
    | ---------- | --------------- | ---------- | ------------------------------ |
-   | 根域名 | A | @ | 76.76.21.21 (PS: Vercel 的 IP) |
+   | 根域名 | A | @ | 76.76.21.21 (Vercel IP) |
    | www 子域名 | CNAME | \* | cname.vercel-dns.com |
+
 4. 關閉 Cloudflare 的 Proxy 代理功能(橙色雲朵)，以避免與 Vercel 的某些功能衝突。
 
 ## 步驟 4: Cloudflare 設置優化
@@ -157,10 +187,10 @@ G -->|6. 返回內容| A
 - 使用 HTTPS 確保網站安全。Vercel 和 Cloudflare 都提供免費的 SSL 證書。
 - 定期檢查你的 DNS 設置,確保一切正常運作。
 - 利用 Cloudflare 的安全功能,如 DDoS 保護和 Web 應用防火牆。
-- 考慮使用 Cloudflare 的 CDN 功能來改善網站性能。
+- 考慮使用 Cloudflare 的 CDN 功能來改善網站效能。
 
 ## 結論
 
-通過結合 Cloudflare 的域名管理和 Vercel 的託管服務，我們可以創建一個強大、安全且高效的網站基礎設施。這個設置不僅提供了出色的性能和安全性,還為未來的擴展和調整提供了靈活性。
+通過結合 Cloudflare 的域名管理和 Vercel 的託管服務，我們可以建立一個強大、安全且高效的網站基礎設施。這個設置不僅提供了出色的效能和安全性，還為未來的擴展和調整提供了靈活性。
 
-記住，網站管理是一個持續的過程。定期檢查和更新設置，以確保最佳性能和安全性。
+請記住，網站管理是一個持續的過程。定期檢查和更新設置，以確保最佳效能和安全性。
