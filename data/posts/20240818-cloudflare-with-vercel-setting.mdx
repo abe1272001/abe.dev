@@ -31,6 +31,8 @@ Vercel 和 Cloudflare 在 DNS（域名系統）方面的關係是一個值得探
   }}
 />
 
+<Hidden>
+
 ```mermaid
 graph LR
 A[用戶] --> B[域名]
@@ -39,8 +41,9 @@ C -->|A 記錄| D[Vercel IP]
 C -->|CNAME| E[Vercel 域名]
 D --> F[Vercel 託管網站]
 E --> F
-
 ```
+
+</Hidden>
 
 這個流程圖展示了用戶請求如何通過 Cloudflare 的 DNS 到達 Vercel 託管的網站。
 
@@ -90,6 +93,8 @@ E --> F
   }}
 />
 
+<Hidden>
+
 ```mermaid
 graph TB
 A[用戶] -->|1. 訪問網站| B(Cloudflare DNS)
@@ -123,6 +128,8 @@ G -->|6. 返回內容| A
     style Vercel fill:#e6ffe6,stroke:#333,stroke-width:2px
 
 ```
+
+</Hidden>
 
 這個流程圖展示了以下步驟：
 

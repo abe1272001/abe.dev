@@ -7,6 +7,7 @@ import { CustomPre } from './mdx/Pre'
 const mdxComponents: MDXComponents = {
   Image: (props) => <Image {...props} alt={props?.alt} />,
   pre: (props) => <CustomPre {...props} />,
+  Hidden: (props) => <div className="hidden" {...props} />,
 }
 
 interface MdxProps {
